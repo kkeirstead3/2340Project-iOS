@@ -10,21 +10,32 @@ import UIKit
 
 class MainMenuViewController: UIViewController {
 
+    // Variables
+    
+    var user: User!
+    
+    // Outlets
+    
+    @IBOutlet weak var NameLabel: UILabel!
+    @IBOutlet weak var EmailLabel: UILabel!
+    @IBOutlet weak var PasswordLabel: UILabel!
+    @IBOutlet weak var CategoryLabel: UILabel!
+    
+    /**
+     * Handles set-up when the view has already loaded.
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        NameLabel.text = user.name
+        EmailLabel.text = user.email
+        PasswordLabel.text = user.password
+        CategoryLabel.text = user.category.rawValue
     }
     
     /**
      * Handles the back press; takes users back to the Welcome screen (ViewController)
      */
-
     @IBAction func pressedBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

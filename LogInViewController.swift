@@ -13,6 +13,8 @@ class LogInViewController: UIViewController {
 
     // Variables
     
+    var chosenUser: User? = nil
+    
     // Outlets
     
     @IBOutlet weak var UsernameTF: UITextField!
@@ -20,10 +22,14 @@ class LogInViewController: UIViewController {
     
     // Actions
     
+    /**
+     * Validates the entered user's credentials
+     */
     @IBAction func logInPressed(_ sender: Any) {
         let logInModel = LogInModel()
-        let valid = logInModel.validSignIn(username: UsernameTF.text!, password: PasswordTF.text!)
-        if (valid) {
+        let user = logInModel.validSignIn(username: UsernameTF.text!, password: PasswordTF.text!)
+        if (user != nil) {
+            chosenUser = user
             performSegue(withIdentifier: "LogInPressed", sender: nil)
         } else {
             let alert = UIAlertController(title: "Invalid Credentials", message: "Please make sure you enter valid credentials.", preferredStyle: .alert)
@@ -54,5 +60,15 @@ class LogInViewController: UIViewController {
     @IBAction func pressedBack(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    /**
+     * Passes the User data to the main menu
+     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+            let destinationVC = segue.destination as! MainMenuViewController
+            destinationVC.user = chosenUser
+    }
+
     
 }
