@@ -21,7 +21,7 @@ class LogInModel {
         }
 
         for user in users {
-            if user.email == username && user.password == password {
+            if user.email.lowercased() == username.lowercased() && user.password == password {
                 return user
             }
         }
