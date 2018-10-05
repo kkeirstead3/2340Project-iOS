@@ -10,8 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
+    /**
+     * Handles set-up when the view has already loaded; calls method to load locations.
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let temp = Locations()
+        temp.loadLocations()
     }
 }
 

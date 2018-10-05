@@ -19,9 +19,7 @@ class LogInViewController: UIViewController {
     
     @IBOutlet weak var UsernameTF: UITextField!
     @IBOutlet weak var PasswordTF: UITextField!
-    
-    // Actions
-    
+        
     /**
      * Validates the entered user's credentials
      */
@@ -43,7 +41,6 @@ class LogInViewController: UIViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     /**
@@ -65,9 +62,8 @@ class LogInViewController: UIViewController {
      * Passes the User data to the main menu
      */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-            let destinationVC = segue.destination as! MainMenuViewController
-            destinationVC.user = chosenUser
+        let destinationVC = segue.destination as! MainMenuViewController
+        destinationVC.user = chosenUser
     }
 
     
