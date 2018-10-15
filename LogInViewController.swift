@@ -9,7 +9,7 @@
 import UIKit
 
 
-class LogInViewController: UIViewController {
+class LogInViewController: UIViewController, UITextFieldDelegate {
 
     // Variables
     
@@ -41,6 +41,9 @@ class LogInViewController: UIViewController {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UsernameTF.delegate = self
+        PasswordTF.delegate = self
     }
     
     /**
@@ -55,6 +58,10 @@ class LogInViewController: UIViewController {
      * Handles the back press; takes users back to the Welcome screen (ViewController)
      */
     @IBAction func pressedBack(_ sender: Any) {
+
+        let _ = textFieldShouldReturn(UsernameTF)
+        let _ = textFieldShouldReturn(PasswordTF)
+
         dismiss(animated: true, completion: nil)
     }
     
@@ -65,6 +72,12 @@ class LogInViewController: UIViewController {
         let destinationVC = segue.destination as! MainMenuViewController
         destinationVC.user = chosenUser
     }
-
     
+    /**
+     * Ensures that the keyboard dismisses correctly when Done is pressed
+     */
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
 }

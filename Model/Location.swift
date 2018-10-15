@@ -12,9 +12,10 @@ class Location: NSObject, NSCoding {
 
     let key, name, latitude, longitude, streetAddress, city, state, zip, type, phone, website: String
     let attributes: [String]
+    var donations: [DonationItem]
     
     /**
-     * Constructor for the location with all of its attributes
+     * Constructor for the location with no donation items
      */
     init(key: String, name: String, latitude: String, longitude: String, streetAddress: String, city: String, state: String, zip: String, type: String, phone: String, website: String) {
         self.key = key
@@ -29,8 +30,28 @@ class Location: NSObject, NSCoding {
         self.phone = phone
         self.website = website
         self.attributes = [key, name, latitude, longitude, streetAddress, city, state, zip, type, phone, website]
+        self.donations = []
     }
     
+    /**
+     * Constructor for the location with its donation items
+     */
+    init(key: String, name: String, latitude: String, longitude: String, streetAddress: String, city: String, state: String, zip: String, type: String, phone: String, website: String, donations: [DonationItem]) {
+        self.key = key
+        self.name = name
+        self.latitude = latitude
+        self.longitude = longitude
+        self.streetAddress = streetAddress
+        self.city = city
+        self.state = state
+        self.zip = zip
+        self.type = type
+        self.phone = phone
+        self.website = website
+        self.attributes = [key, name, latitude, longitude, streetAddress, city, state, zip, type, phone, website]
+        self.donations = donations
+    }
+
     /**
      * Since Location is a custom object, decoder constructs it from its components
      */
@@ -46,8 +67,9 @@ class Location: NSObject, NSCoding {
         let decodedType = aDecoder.decodeObject(forKey: "Type") as! String
         let decodedPhone = aDecoder.decodeObject(forKey: "Phone") as! String
         let decodedWebsite = aDecoder.decodeObject(forKey: "Website") as! String
-        
-        self.init(key: decodedKey, name: decodedName, latitude: decodedLatitude, longitude: decodedLongitude, streetAddress: decodedStreetAddress, city: decodedCity, state: decodedState, zip: decodedZip, type: decodedType, phone: decodedPhone, website: decodedWebsite)
+        let decodedDonations = aDecoder.decodeObject(forKey: "Donations") as! [DonationItem]
+
+        self.init(key: decodedKey, name: decodedName, latitude: decodedLatitude, longitude: decodedLongitude, streetAddress: decodedStreetAddress, city: decodedCity, state: decodedState, zip: decodedZip, type: decodedType, phone: decodedPhone, website: decodedWebsite, donations: decodedDonations)
     }
     
     /**
@@ -65,5 +87,6 @@ class Location: NSObject, NSCoding {
         aCoder.encode(type, forKey: "Type")
         aCoder.encode(phone, forKey: "Phone")
         aCoder.encode(website, forKey: "Website")
+        aCoder.encode(donations, forKey: "Donations")
     }
 }

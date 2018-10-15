@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewAccountViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class NewAccountViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
 
     // Variables
@@ -34,10 +34,15 @@ class NewAccountViewController: UIViewController, UIPickerViewDelegate, UIPicker
      * Handles the back press; takes users back to the Welcome screen (ViewController)
      */
     @IBAction func pressedBack(_ sender: Any) {
+        
+        let _ = textFieldShouldReturn(nameTF)
+        let _ = textFieldShouldReturn(emailTF)
+        let _ = textFieldShouldReturn(passwordTF)
+        let _ = textFieldShouldReturn(confirmPasswordTF)
+
         dismiss(animated: true, completion: nil)
     }
 
-    
     /**
      * Validates the creation of a new account; if valid, goes back to main screen
      */
@@ -74,6 +79,12 @@ class NewAccountViewController: UIViewController, UIPickerViewDelegate, UIPicker
                 illegalInput = true
             } else {
                 // Signifies a new user has successfully been created
+                
+                let _ = textFieldShouldReturn(nameTF)
+                let _ = textFieldShouldReturn(emailTF)
+                let _ = textFieldShouldReturn(passwordTF)
+                let _ = textFieldShouldReturn(confirmPasswordTF)
+
                 dismiss(animated: true, completion: nil)
             }
         }
@@ -90,6 +101,11 @@ class NewAccountViewController: UIViewController, UIPickerViewDelegate, UIPicker
      */
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        nameTF.delegate = self
+        emailTF.delegate = self
+        passwordTF.delegate = self
+        confirmPasswordTF.delegate = self
 
         PickerView.dataSource = self;
         PickerView.delegate = self;
@@ -110,5 +126,13 @@ class NewAccountViewController: UIViewController, UIPickerViewDelegate, UIPicker
     // The data to return for the row and component (column) that's being passed in
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return userTypes[row]
+    }
+    
+    /**
+     * Ensures that the keyboard dismisses correctly when Done is pressed
+     */
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 }

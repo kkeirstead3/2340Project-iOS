@@ -29,4 +29,12 @@ class MainMenuViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    /**
+     * Sets the user for the Locations view to the one that signed in
+     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! LocationsViewController
+        destinationVC.user = self.user
+    }
+    
 }

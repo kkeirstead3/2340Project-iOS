@@ -13,6 +13,7 @@ class LocationInfoViewController: UIViewController {
     // Variables
     
     var location: Location! = nil
+    var user: User! = nil
     
     // Actions
     
@@ -23,12 +24,32 @@ class LocationInfoViewController: UIViewController {
     // Outlets
     
     @IBOutlet weak var InfoScrollView: UIScrollView!
+    @IBOutlet weak var AddDonationButton: UIButton!
+    @IBOutlet weak var ViewDonationsButton: UIButton!
     
     /**
      * Calls set up for the scroll view
      */
     override func viewDidAppear(_ animated: Bool) {
+        
         setUpScrollView()
+        
+        if user.category == Category.UserTypes.User {
+            let existingFrame = InfoScrollView.frame
+            let height = UIScreen.main.bounds.height - existingFrame.origin.y - 16
+            
+            InfoScrollView.frame = CGRect(x: existingFrame.origin.x, y: existingFrame.origin.y, width: existingFrame.width, height: height)
+        }
+    }
+    
+    /**
+     * Hides the add and view buttons if the person does not have the correct privileges
+     */
+    override func viewDidLoad() {
+        if user.category == Category.UserTypes.User {
+            AddDonationButton.isHidden = true
+            ViewDonationsButton.isHidden = true
+        }
     }
     
     /**
@@ -68,5 +89,18 @@ class LocationInfoViewController: UIViewController {
         }
         
         InfoScrollView.contentSize = CGSize(width: Int(InfoScrollView.frame.width), height: yCoord)
+    }
+    
+    /**
+     * Sets the location to be used in the add item view
+     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AddItem" {
+            let destinationVC = segue.destination as! AddItemViewController
+            destinationVC.location = self.location
+        } else {
+            let destinationVC = segue.destination as! DonationsViewController
+            destinationVC.location = self.location
+        }
     }
 }

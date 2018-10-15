@@ -17,8 +17,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let temp = Locations()
-        temp.loadLocations()
+        let initSetUp = InitialSetUp()
+        initSetUp.setDonationItemCategories()
+        
+        let tempLocation = Locations()
+        tempLocation.loadLocations()
     }
 }
 

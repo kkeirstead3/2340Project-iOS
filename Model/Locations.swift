@@ -81,11 +81,14 @@ class Locations: NSObject {
      */
     func parseContents(contents: String) {
         
+        var locations: [String: Location] = [:]
+        if let data = UserDefaults.standard.data(forKey: "Locations") {
+            locations = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Location] ?? [:]
+        }
+
         var lines = contents.split(separator: "\n")
         
         lines.removeFirst()
-        
-        var locations: Array<Location>! = []
         
         for line in lines {
             let splitLine = line.split(separator: ",")
@@ -99,11 +102,36 @@ class Locations: NSObject {
             
             let tempLocation = Location(key: listOfElements[SaveEquivalencies.Key.rawValue], name: listOfElements[SaveEquivalencies.Name.rawValue], latitude: listOfElements[SaveEquivalencies.Latitude.rawValue], longitude: listOfElements[SaveEquivalencies.Longitude.rawValue], streetAddress: listOfElements[SaveEquivalencies.StreetAddress.rawValue], city: listOfElements[SaveEquivalencies.City.rawValue], state: listOfElements[SaveEquivalencies.State.rawValue], zip: listOfElements[SaveEquivalencies.Zip.rawValue], type: listOfElements[SaveEquivalencies.LocationType.rawValue], phone: listOfElements[SaveEquivalencies.Phone.rawValue], website: listOfElements[SaveEquivalencies.Website.rawValue])
             
-            locations.append(tempLocation)
+            // Makes sure data is not overwritten
+            if locations[tempLocation.key] == nil {
+                locations[tempLocation.key] = tempLocation
+            }
         }
         
         let encodedData = NSKeyedArchiver.archivedData(withRootObject: locations)
 
         UserDefaults.standard.set(encodedData, forKey: "Locations")
     }
+    
+    /**
+     * Returns a dictionary with the location's key and the location itself as the two components
+     */
+    func returnListOfLocations() -> [String: Location]
+    {
+        var locations: [String: Location] = [:]
+        if let data = UserDefaults.standard.data(forKey: "Locations") {
+            locations = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Location] ?? [:]
+        }
+        return locations
+    }
+    
+    /**
+     * After making changes to a location (updating the donation item inventory there), updated here
+     */
+    func updateLocations(locations: [String: Location])
+    {
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: locations)
+        
+        UserDefaults.standard.set(encodedData, forKey: "Locations")
+    }    
 }
