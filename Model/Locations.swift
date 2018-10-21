@@ -135,6 +135,9 @@ class Locations: NSObject {
         UserDefaults.standard.set(encodedData, forKey: "Locations")
     }
     
+    /**
+     * Returns a list of donation items from all locations that are in the specified category
+     */
     func getListOfItemsForCategory(category: String) -> [DonationItem]
     {
         var locations: [String: Location] = [:]
@@ -154,4 +157,28 @@ class Locations: NSObject {
         
         return toReturn
     }
+    
+    /**
+     * Returns a list of donation items from all locations that contain the specified name
+     */
+    func getListOfItemsForName(name: String) -> [DonationItem]
+    {
+        var locations: [String: Location] = [:]
+        if let data = UserDefaults.standard.data(forKey: "Locations") {
+            locations = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Location] ?? [:]
+        }
+        
+        var toReturn: [DonationItem] = []
+        
+        for location in locations.values {
+            for donation in location.donations {
+                if donation.shortDescription.lowercased().contains(name.lowercased()) {
+                    toReturn.append(donation)
+                }
+            }
+        }
+        
+        return toReturn
+    }
+
 }

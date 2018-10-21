@@ -24,18 +24,21 @@ class SearchViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    
     // Outlets
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    /**
+     * Sets the location for the specific search pages (if it exists)
+     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "SearchByCategorySegue" {
+        if segue.identifier == "CategorySegue" {
             let destinationVC = segue.destination as! SearchByCategoryViewController
+            destinationVC.location = self.location
+        } else if segue.identifier == "NameSegue" {
+            let destinationVC = segue.destination as! SearchByNameViewController
             destinationVC.location = self.location
         }
     }

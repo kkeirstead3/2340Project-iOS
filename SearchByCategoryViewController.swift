@@ -36,6 +36,9 @@ class SearchByCategoryViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var ItemsTV: UITableView!
     
     
+    /**
+     * Set up for the table views
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
 

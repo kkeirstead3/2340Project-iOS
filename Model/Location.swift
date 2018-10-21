@@ -90,11 +90,29 @@ class Location: NSObject, NSCoding {
         aCoder.encode(donations, forKey: "Donations")
     }
     
+    /**
+     * Returns all donation items in the specified category for the current location
+     */
     func getItemsForCategory(category: String) -> [DonationItem]
     {
         var toReturn: [DonationItem] = []
         for donation in donations {
             if donation.category.contains(category) {
+                toReturn.append(donation)
+            }
+        }
+        
+        return toReturn
+    }
+    
+    /**
+     * Returns all donation items containing the specified name for the current location
+     */
+    func getItemsForName(name: String) -> [DonationItem]
+    {
+        var toReturn: [DonationItem] = []
+        for donation in donations {
+            if donation.shortDescription.lowercased().contains(name.lowercased()) {
                 toReturn.append(donation)
             }
         }

@@ -36,7 +36,7 @@ class LocationInfoViewController: UIViewController {
         
         if user.category == Category.UserTypes.User {
             let existingFrame = InfoScrollView.frame
-            let height = UIScreen.main.bounds.height - existingFrame.origin.y - 16
+            let height = UIScreen.main.bounds.height - existingFrame.origin.y - 16 * 2 - AddDonationButton.frame.height
             
             InfoScrollView.frame = CGRect(x: existingFrame.origin.x, y: existingFrame.origin.y, width: existingFrame.width, height: height)
         }
