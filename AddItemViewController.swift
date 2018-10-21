@@ -66,7 +66,8 @@ class AddItemViewController: UIViewController, UITableViewDelegate, UITableViewD
         let chosenCategories: [String] = tempAddItemModel.getChosenCategories(categories: categories)
         
         if shortDescription != "" && fullDescription != "" && value != "" && chosenCategories != [] {
-            let newDonation = DonationItem(timeStamp: timeStamp, location: location, shortDescription: shortDescription, fullDescription: fullDescription, comments: comments ?? "", value: value, category: chosenCategories)
+            let uuidString = UUID().uuidString
+            let newDonation = DonationItem(timeStamp: timeStamp, location: location, shortDescription: shortDescription, fullDescription: fullDescription, comments: comments ?? "", value: value, category: chosenCategories, identifier: uuidString)
             
             location.donations.append(newDonation)
             

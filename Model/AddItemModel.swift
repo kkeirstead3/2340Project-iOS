@@ -29,6 +29,18 @@ class AddItemModel: NSObject {
     }
     
     /**
+     * Returns a String array of the categories
+     */
+    func getStringCategories() -> [String] {
+        var categories: [String] = []
+        if let data = UserDefaults.standard.data(forKey: "Categories") {
+            categories = NSKeyedUnarchiver.unarchiveObject(with: data) as! [String]
+        }
+        
+        return categories
+    }
+    
+    /**
      * Takes the tuple and looks at the boolean value for each entry; if the boolean value is true, then the category has been selected, and will be included in the returned array
      */
     func getChosenCategories(categories: [(String, Bool)]) -> [String] {

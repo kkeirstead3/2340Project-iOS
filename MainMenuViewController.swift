@@ -33,8 +33,13 @@ class MainMenuViewController: UIViewController {
      * Sets the user for the Locations view to the one that signed in
      */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! LocationsViewController
-        destinationVC.user = self.user
+        if (segue.identifier == "ViewLocationsSegue") {
+            let destinationVC = segue.destination as! LocationsViewController
+            destinationVC.user = self.user
+        } else if (segue.identifier == "SearchSegue"){
+            let destinationVC = segue.destination as! SearchViewController
+            destinationVC.user = self.user
+        }
     }
     
 }

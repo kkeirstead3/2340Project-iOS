@@ -133,5 +133,25 @@ class Locations: NSObject {
         let encodedData = NSKeyedArchiver.archivedData(withRootObject: locations)
         
         UserDefaults.standard.set(encodedData, forKey: "Locations")
-    }    
+    }
+    
+    func getListOfItemsForCategory(category: String) -> [DonationItem]
+    {
+        var locations: [String: Location] = [:]
+        if let data = UserDefaults.standard.data(forKey: "Locations") {
+            locations = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Location] ?? [:]
+        }
+        
+        var toReturn: [DonationItem] = []
+        
+        for location in locations.values {
+            for donation in location.donations {
+                if donation.category.contains(category) {
+                    toReturn.append(donation)
+                }
+            }
+        }
+        
+        return toReturn
+    }
 }

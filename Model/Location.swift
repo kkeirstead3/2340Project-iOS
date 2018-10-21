@@ -89,4 +89,16 @@ class Location: NSObject, NSCoding {
         aCoder.encode(website, forKey: "Website")
         aCoder.encode(donations, forKey: "Donations")
     }
+    
+    func getItemsForCategory(category: String) -> [DonationItem]
+    {
+        var toReturn: [DonationItem] = []
+        for donation in donations {
+            if donation.category.contains(category) {
+                toReturn.append(donation)
+            }
+        }
+        
+        return toReturn
+    }
 }

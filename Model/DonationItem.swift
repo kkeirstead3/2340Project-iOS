@@ -17,12 +17,13 @@ class DonationItem: NSObject, NSCoding {
     let comments: String
     let value: String
     let category: [String]
+    let identifier: String
     
     /**
      * Constructor
      */
     init(timeStamp: String, location: Location, shortDescription: String,
-         fullDescription: String, comments: String, value: String, category: [String]) {
+         fullDescription: String, comments: String, value: String, category: [String], identifier: String) {
         self.timeStamp = timeStamp
         self.location = location
         self.shortDescription = shortDescription
@@ -30,6 +31,7 @@ class DonationItem: NSObject, NSCoding {
         self.comments = comments
         self.value = value
         self.category = category
+        self.identifier = identifier
     }
     
     /**
@@ -43,8 +45,9 @@ class DonationItem: NSObject, NSCoding {
         let decodedComments = aDecoder.decodeObject(forKey: "Comments") as! String
         let decodedValue = aDecoder.decodeObject(forKey: "Value") as! String
         let decodedCategory = aDecoder.decodeObject(forKey: "Category") as! [String]
+        let decodedIdentifier = aDecoder.decodeObject(forKey: "Identifier") as! String
 
-        self.init(timeStamp: decodedTimeStamp, location: decodedLocation, shortDescription: decodedShortDescription, fullDescription: decodedFullDescription, comments: decodedComments, value: decodedValue, category: decodedCategory)
+        self.init(timeStamp: decodedTimeStamp, location: decodedLocation, shortDescription: decodedShortDescription, fullDescription: decodedFullDescription, comments: decodedComments, value: decodedValue, category: decodedCategory, identifier: decodedIdentifier)
     }
     
     /**
@@ -58,6 +61,7 @@ class DonationItem: NSObject, NSCoding {
         aCoder.encode(comments, forKey: "Comments")
         aCoder.encode(value, forKey: "Value")
         aCoder.encode(category, forKey: "Category")
+        aCoder.encode(identifier, forKey: "Identifier")
     }
 
 }

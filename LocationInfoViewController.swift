@@ -98,8 +98,11 @@ class LocationInfoViewController: UIViewController {
         if segue.identifier == "AddItem" {
             let destinationVC = segue.destination as! AddItemViewController
             destinationVC.location = self.location
-        } else {
+        } else if segue.identifier == "ViewItems" {
             let destinationVC = segue.destination as! DonationsViewController
+            destinationVC.location = self.location
+        } else if segue.identifier == "SearchByLocationSegue" {
+            let destinationVC = segue.destination as! SearchViewController
             destinationVC.location = self.location
         }
     }
