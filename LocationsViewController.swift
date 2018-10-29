@@ -67,7 +67,7 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
         
         var cell : UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "cell")
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "cell")
+            cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
         }
         if (locations?.count ?? 0) > 0 {
             let key = String(indexPath.row + 1)

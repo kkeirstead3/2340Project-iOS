@@ -72,7 +72,7 @@ class SearchByNameViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "cell")
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
+            cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
         }
         if onScreenItems.count > 0 {
             cell?.textLabel!.text = onScreenItems[indexPath.row].shortDescription

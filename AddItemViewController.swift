@@ -126,14 +126,14 @@ class AddItemViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "cell")
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
+            cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
         }
         if categories.count > 0 {
             cell?.textLabel!.text = categories[indexPath.row].0
             if (categories[indexPath.row].1 == false) {
-                cell?.accessoryType = UITableViewCellAccessoryType.none
+                cell?.accessoryType = UITableViewCell.AccessoryType.none
             } else {
-                cell?.accessoryType = UITableViewCellAccessoryType.checkmark
+                cell?.accessoryType = UITableViewCell.AccessoryType.checkmark
             }
         }
         
@@ -150,10 +150,10 @@ class AddItemViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         if (categories[indexPath.row].1 == false) {
             categories[indexPath.row].1 = true
-            CategoriesTV.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
+            CategoriesTV.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
         } else {
             categories[indexPath.row].1 = false
-            CategoriesTV.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.none
+            CategoriesTV.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
         }
     }
     

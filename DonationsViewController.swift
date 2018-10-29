@@ -51,7 +51,7 @@ class DonationsViewController: UIViewController, UITableViewDelegate, UITableVie
         
         var cell : UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "cell")
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "cell")
+            cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: "cell")
         }
         if (location.donations.count) > 0 {
             cell?.textLabel!.text = location.donations[indexPath.row].shortDescription
