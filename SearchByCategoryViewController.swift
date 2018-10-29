@@ -107,6 +107,12 @@ class SearchByCategoryViewController: UIViewController, UITableViewDelegate, UIT
                 onScreenItems = location!.getItemsForCategory(category: categories[indexPath.row])
             }
             
+            if onScreenItems.count == 0 {
+                let alert = UIAlertController(title: "No Search Results", message: "No results were found for that category", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self.present(alert, animated: true)
+            }
+            
             DispatchQueue.main.async{
                 self.ItemsTV.reloadData()
             }

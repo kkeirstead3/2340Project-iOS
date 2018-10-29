@@ -38,6 +38,13 @@ class SearchByNameViewController: UIViewController, UITableViewDataSource, UITab
         } else {
             onScreenItems = location!.getItemsForName(name: ItemNameTF.text ?? "")
         }
+        
+        if onScreenItems.count == 0 {
+            let alert = UIAlertController(title: "No Search Results", message: "No results were found for your query; try another search", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        }
+
         DispatchQueue.main.async{
             self.ItemsTV.reloadData()
         }
